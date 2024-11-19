@@ -87,10 +87,6 @@ public class PlayerScript : MonoBehaviour
     public void KeyboardMovement()
     {
 
-
-
-        //Debug.Log(map.GetTile(map.WorldToCell(movePoint.position)));
-
         if (map.GetTile(map.WorldToCell(movePoint.position)))
         {
             map.SetTile(map.WorldToCell(movePoint.position), null);
