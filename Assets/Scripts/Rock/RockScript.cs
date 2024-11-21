@@ -1,5 +1,6 @@
 using UnityEngine.Tilemaps;
 using UnityEngine;
+using UnityEditor.ShaderGraph;
 
 namespace Rock
 {
@@ -7,8 +8,10 @@ namespace Rock
 
     public class RockScript : MonoBehaviour
     {
+        public LayerMask otherRock;
 
         public Transform groundCheck;
+        public Collider2D groundCheckCol;
         public Transform playerMovePoint;
 
         // Tilemaps
@@ -31,6 +34,7 @@ namespace Rock
         void Start()
         {
             sm = gameObject.AddComponent<StateMachine>();
+            groundCheckCol = groundCheck.GetComponent<Collider2D>();
 
             // add new states here
             idleState = new IdleState(this, sm);
@@ -60,7 +64,7 @@ namespace Rock
 
             // Set to weak state
 
-            if(groundCheck.position == playerMovePoint.position || hardTile.GetTile(hardTile.WorldToCell(groundCheck.position)))
+            if(groundCheck.position == playerMovePoint.position || hardTile.GetTile(hardTile.WorldToCell(groundCheck.position)) || Physics2D.OverlapCircle(groundCheck.position, .2f, otherRock))
             {
                 sm.ChangeState(weakState);
             }
@@ -71,7 +75,7 @@ namespace Rock
             // TODO: While weak, check if there is a gap beneath or next to the rock. If so then fall in the gap
 
             
-            if (hardTile.GetTile(hardTile.WorldToCell(groundCheck.position)))
+            if (hardTile.GetTile(hardTile.WorldToCell(groundCheck.position)) || Physics2D.OverlapCircle(groundCheck.position, .2f, otherRock))
             {
                 // If the rock is on a hard tile
 
@@ -88,7 +92,8 @@ namespace Rock
 
         public bool CheckForTile(Vector3 checkPos) // Returns true if a tile is in the way, else it returns false
         {
-            if (hardTile.GetTile(hardTile.WorldToCell(checkPos)) || dirtTile.GetTile(dirtTile.WorldToCell(checkPos)))
+
+            if (hardTile.GetTile(hardTile.WorldToCell(checkPos)) || dirtTile.GetTile(dirtTile.WorldToCell(checkPos)) || Physics2D.OverlapCircle(checkPos, .2f, otherRock))
             {
                 // Return true if a tile is occupying the position
                 Debug.Log("Tile beneath");

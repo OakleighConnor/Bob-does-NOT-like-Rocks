@@ -31,7 +31,7 @@ namespace Rock
 
 
             // If the player is on an unstable tile (hard tile, rock)
-            if (rock.hardTile.GetTile(rock.hardTile.WorldToCell(rock.groundCheck.position)))
+            if (rock.hardTile.GetTile(rock.hardTile.WorldToCell(rock.groundCheck.position)) || Physics2D.OverlapCircle(rock.groundCheck.position, .2f, rock.otherRock))
             {
                 Debug.Log("On hard tile");
 
