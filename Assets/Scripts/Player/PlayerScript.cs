@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class PlayerScript : MonoBehaviour
 {
+    public DoorManager dm;
+
     public float speed = 5f;
     public Transform movePoint;
 
@@ -11,11 +14,14 @@ public class PlayerScript : MonoBehaviour
     public Tilemap map;
 
     public LayerMask obstruction;
+    public LayerMask doorLayer;
+
+    public Transform door;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        movePoint.parent = null;
+        LoadPlayer();
     }
 
     // Update is called once per frame
@@ -27,6 +33,13 @@ public class PlayerScript : MonoBehaviour
         KeyboardMovement();
 
         SwipeDetection.instance.swipePerformed += context => { Movement(context); };
+    }
+
+    public void LoadPlayer()
+    {
+        movePoint.parent = null;
+        door = GameObject.FindGameObjectWithTag("Door").transform;
+        dm = door.GetComponent<DoorManager>();
     }
 
     public void Movement(Vector2 direction)

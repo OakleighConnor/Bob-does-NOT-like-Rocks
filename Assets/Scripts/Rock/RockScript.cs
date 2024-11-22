@@ -92,15 +92,11 @@ namespace Rock
 
         public bool CheckForTile(Vector3 checkPos) // Returns true if a tile is in the way, else it returns false
         {
-
             if (hardTile.GetTile(hardTile.WorldToCell(checkPos)) || dirtTile.GetTile(dirtTile.WorldToCell(checkPos)) || Physics2D.OverlapCircle(checkPos, .2f, otherRock))
             {
                 // Return true if a tile is occupying the position
-                Debug.Log("Tile beneath");
                 return true;
             }
-
-            Debug.Log("No tile beneath");
             return false;
         }
     }

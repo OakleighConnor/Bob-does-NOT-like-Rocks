@@ -11,13 +11,11 @@ namespace Rock
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Idle Entered");
         }
 
         public override void Exit()
         {
             base.Exit();
-            Debug.Log("Idle Exitted");
         }
 
         public override void HandleInput()

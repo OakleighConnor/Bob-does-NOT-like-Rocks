@@ -11,13 +11,11 @@ namespace Rock
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Fall state entered");
         }
 
         public override void Exit()
         {
             base.Exit();
-            Debug.Log("Fall state exitted");
         }
 
         public override void HandleInput()
