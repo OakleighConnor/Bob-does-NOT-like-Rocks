@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-
+using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
     public DoorManager dm;
@@ -18,6 +18,8 @@ public class PlayerScript : MonoBehaviour
 
     public Transform door;
 
+    public AudioManager am;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,10 +35,14 @@ public class PlayerScript : MonoBehaviour
         KeyboardMovement();
 
         SwipeDetection.instance.swipePerformed += context => { Movement(context); };
-    }
 
+        
+        
+    }
     public void LoadPlayer()
     {
+        am.ChangeMusic(am.level);
+
         movePoint.parent = null;
         door = GameObject.FindGameObjectWithTag("Door").transform;
         dm = door.GetComponent<DoorManager>();

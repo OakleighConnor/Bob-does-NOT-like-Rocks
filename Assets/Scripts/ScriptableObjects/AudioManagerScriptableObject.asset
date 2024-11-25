@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a40fb1361a280ed4ba5560c1477e4f36, type: 3}
+  m_Name: AudioManagerScriptableObject
+  m_EditorClassIdentifier: 
+  title: {fileID: 0}
+  level: {fileID: 8300000, guid: bcdff10adf4d6cf438c6ea04a4c6ee69, type: 3}
+  currentTrack: {fileID: 0}
+  targetTrack: {fileID: 0}
+  caveAmbience: {fileID: 0}
+  moleDigging: {fileID: 0}
+  waterDrips: {fileID: 0}
+  loading: {fileID: 0}
+  key: {fileID: 0}
+  rock: {fileID: 0}
+  dig: {fileID: 0}
+  doorOpen: {fileID: 0}
+  playerEscape: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: 605639a166b7e6b4ab8aeb4f8b33655b, type: 2}
+  musicSource: {fileID: 1308968976241143111, guid: 1e0554cab13a9024cb185a77a6487727, type: 3}
+  sfxSource: {fileID: 4593550821805000531, guid: e063f3df056eb884f8c9d419e104568b, type: 3}
+  musicSourceObject: {fileID: 3720348391739182374, guid: 1e0554cab13a9024cb185a77a6487727, type: 3}
+  musicSourceObjectPrefab: {fileID: 0}
+  sfxSourceObject: {fileID: 0}
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  track: 0
