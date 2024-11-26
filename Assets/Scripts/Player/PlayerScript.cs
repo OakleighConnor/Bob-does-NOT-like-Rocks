@@ -20,6 +20,8 @@ public class PlayerScript : MonoBehaviour
 
     public AudioManager am;
 
+    public float audioSpeed;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -36,11 +38,11 @@ public class PlayerScript : MonoBehaviour
 
         SwipeDetection.instance.swipePerformed += context => { Movement(context); };
 
-        
-        
     }
     public void LoadPlayer()
     {
+        audioSpeed = am.startingPitch;
+
         am.ChangeMusic(am.level);
 
         movePoint.parent = null;
@@ -52,7 +54,12 @@ public class PlayerScript : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, movePoint.position) != 0f) return;
 
-        if(direction.x <= 0)
+        if (audioSpeed < 2f)
+        {
+            audioSpeed += 0.1f;
+        }
+
+        if (direction.x <= 0)
         {
             moveDir.x = direction.x * -1;
         }
@@ -106,6 +113,8 @@ public class PlayerScript : MonoBehaviour
     public void KeyboardMovement()
     {
 
+
+
         if (map.GetTile(map.WorldToCell(movePoint.position)))
         {
             map.SetTile(map.WorldToCell(movePoint.position), null);
@@ -115,6 +124,18 @@ public class PlayerScript : MonoBehaviour
         // Controls movement to make sure player only moves 1 grid at a time
         if (Vector3.Distance(transform.position, movePoint.position) == 0f)
         {
+
+            audioSpeed = am.SetMusicSpeed(audioSpeed);
+
+
+            if (Input.GetAxisRaw("Horizontal") == 1f || Input.GetAxisRaw("Vertical") == 1f)
+            {
+                if (audioSpeed < 2f)
+                {
+                    audioSpeed += 0.1f;
+                }
+            }
+
             // Break the tile that the player walks onto
             if (map.GetTile(map.WorldToCell(movePoint.position)))
             {
@@ -140,5 +161,10 @@ public class PlayerScript : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void Death()
+    {
+        Debug.Log("Player Death");
     }
 }

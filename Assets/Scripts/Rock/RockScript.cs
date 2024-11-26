@@ -24,6 +24,7 @@ namespace Rock
         public FallingState fallState;
 
         public StateMachine sm;
+        public PlayerScript player;
 
 
         void Awake()
@@ -34,6 +35,7 @@ namespace Rock
         void Start()
         {
             sm = gameObject.AddComponent<StateMachine>();
+            player = FindAnyObjectByType<PlayerScript>();
             groundCheckCol = groundCheck.GetComponent<Collider2D>();
 
             // add new states here

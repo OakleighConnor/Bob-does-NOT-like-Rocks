@@ -12,25 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40fb1361a280ed4ba5560c1477e4f36, type: 3}
   m_Name: AudioManagerScriptableObject
   m_EditorClassIdentifier: 
+  startingPitch: 1
   title: {fileID: 0}
   level: {fileID: 8300000, guid: bcdff10adf4d6cf438c6ea04a4c6ee69, type: 3}
   currentTrack: {fileID: 0}
   targetTrack: {fileID: 0}
-  caveAmbience: {fileID: 0}
-  moleDigging: {fileID: 0}
-  waterDrips: {fileID: 0}
-  loading: {fileID: 0}
-  key: {fileID: 0}
-  rock: {fileID: 0}
-  dig: {fileID: 0}
-  doorOpen: {fileID: 0}
-  playerEscape: {fileID: 0}
+  caveAmbience: {fileID: 8300000, guid: 89c838232f92b9e4682b9a5fca6de532, type: 3}
+  moleDigging: {fileID: 8300000, guid: 887d4cb4bbb97794695649e357c5c26f, type: 3}
+  waterDrips: {fileID: 8300000, guid: 949b2dfc0e0fbdb439da0ca195c0903a, type: 3}
+  loading: {fileID: 8300000, guid: 0354c3aebdb0df640b37cc2a7d762edb, type: 3}
+  key: {fileID: 8300000, guid: 22b0c72c534c19b42a2bf9dfe47eef9f, type: 3}
+  rock: {fileID: 8300000, guid: 88158dc27abc2b24ea04fdccc842a717, type: 3}
+  dig: {fileID: 8300000, guid: 8fa08e6a4d0a2184a80fc6812ff6c2ed, type: 3}
+  doorOpen: {fileID: 8300000, guid: 7010271e78078394d8b71155e9dc58b4, type: 3}
+  playerEscape: {fileID: 8300000, guid: 5591b9c63ae3448478dadf26a9f70a4f, type: 3}
   audioMixer: {fileID: 24100000, guid: 605639a166b7e6b4ab8aeb4f8b33655b, type: 2}
-  musicSource: {fileID: 1308968976241143111, guid: 1e0554cab13a9024cb185a77a6487727, type: 3}
-  sfxSource: {fileID: 4593550821805000531, guid: e063f3df056eb884f8c9d419e104568b, type: 3}
-  musicSourceObject: {fileID: 3720348391739182374, guid: 1e0554cab13a9024cb185a77a6487727, type: 3}
-  musicSourceObjectPrefab: {fileID: 0}
-  sfxSourceObject: {fileID: 0}
+  musicSourcePref: {fileID: 1308968976241143111, guid: 1e0554cab13a9024cb185a77a6487727, type: 3}
+  musicSource: {fileID: 0}
+  sfxSourcePref: {fileID: 4593550821805000531, guid: e063f3df056eb884f8c9d419e104568b, type: 3}
+  sfxSource: {fileID: 0}
   musicSlider: {fileID: 0}
   sfxSlider: {fileID: 0}
   track: 0

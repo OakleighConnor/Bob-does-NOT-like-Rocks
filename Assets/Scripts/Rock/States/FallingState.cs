@@ -37,6 +37,11 @@ namespace Rock
                 }
 
             }
+
+            if(rock.player.movePoint.position == rock.groundCheck.position)
+            {
+                rock.player.Death();
+            }
         }
 
         public override void PhysicsUpdate()

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 [CreateAssetMenu(fileName = "Audio Manager", menuName = "Audio Manager/Audio Manager")]
 public class AudioManager : ScriptableObject
 {
+    public float startingPitch;
+
     [Header("Music")]
     public AudioClip title;
     public AudioClip level;
@@ -30,7 +32,9 @@ public class AudioManager : ScriptableObject
     [SerializeField] private AudioMixer audioMixer;
 
     [Header("Audio sources")]
+    [SerializeField] AudioSource musicSourcePref;
     [SerializeField] AudioSource musicSource;
+    [SerializeField] AudioSource sfxSourcePref;
     [SerializeField] AudioSource sfxSource;
 
     [Header("UI")]
@@ -47,8 +51,30 @@ public class AudioManager : ScriptableObject
     //TODO: Check that the music plays upon loading a different scene;
 
 
+    public float SetMusicSpeed(float speed)
+    {
+
+        musicSource.pitch = speed;
+
+        if(speed <= 1)
+        {
+            speed = 1;
+        }
+        else
+        {
+            speed -= 0.005f;
+        }
+
+        audioMixer.SetFloat("PitchOfMusic", 1f / speed);
+
+        return speed;
+    }
+
+
     public void ChangeMusic(AudioClip clip)
     {
+        musicSource = Instantiate(musicSourcePref).GetComponent<AudioSource>();
+
         if (PlayerPrefs.HasKey("musicVolume"))
         {
             //LoadVolume();
@@ -58,11 +84,10 @@ public class AudioManager : ScriptableObject
             //SetMusicVolume();
         }
         
-
         musicSource.clip = clip;
         musicSource.Play();
 
-        Instantiate(musicSource.gameObject, new Vector3(0, 0, 0), Quaternion.identity);
+        musicSource.pitch = startingPitch;
     }
 
     public void RestartMusic()
