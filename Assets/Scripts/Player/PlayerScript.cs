@@ -56,7 +56,7 @@ public class PlayerScript : MonoBehaviour
 
         if (audioSpeed < 2f)
         {
-            audioSpeed += 0.1f;
+            audioSpeed += 0.2f;
         }
 
         if (direction.x <= 0)
@@ -132,7 +132,7 @@ public class PlayerScript : MonoBehaviour
             {
                 if (audioSpeed < 2f)
                 {
-                    audioSpeed += 0.1f;
+                    audioSpeed += 0.2f;
                 }
             }
 

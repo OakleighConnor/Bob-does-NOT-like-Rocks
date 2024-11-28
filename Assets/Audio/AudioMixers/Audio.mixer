@@ -58,8 +58,12 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
+  - guid: 02906abc61ee1864d9225a22d4e4afa8
+    name: musicVolume
   - guid: 499d7fb8cad8f4a4fbfc8de4e5413579
-    name: PitchOfMusic
+    name: pitch
+  - guid: 3a98d071b203d27469e4f0ddbdf582ff
+    name: sfxVolume
   m_AudioMixerGroupViews:
   - guids:
     - a7eb9dcc1b4b1024cb937f5a2d3cd358

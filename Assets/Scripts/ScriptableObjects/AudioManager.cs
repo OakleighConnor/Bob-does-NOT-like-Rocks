@@ -29,17 +29,13 @@ public class AudioManager : ScriptableObject
     public AudioClip playerEscape;
 
     [Header("Mixers")]
-    [SerializeField] private AudioMixer audioMixer;
+    public AudioMixer audioMixer;
 
     [Header("Audio sources")]
     [SerializeField] AudioSource musicSourcePref;
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource sfxSourcePref;
     [SerializeField] AudioSource sfxSource;
-
-    [Header("UI")]
-    [SerializeField] private Slider musicSlider; 
-    [SerializeField] private Slider sfxSlider;
 
     public AudioTrack track;
     public enum AudioTrack
@@ -56,7 +52,10 @@ public class AudioManager : ScriptableObject
 
         musicSource.pitch = speed;
 
-        if(speed <= 1)
+        if(speed >)
+        audioMixer.SetFloat("Pitch", 1f / speed);
+
+        if (speed <= 1)
         {
             speed = 1;
         }
@@ -64,8 +63,6 @@ public class AudioManager : ScriptableObject
         {
             speed -= 0.005f;
         }
-
-        audioMixer.SetFloat("PitchOfMusic", 1f / speed);
 
         return speed;
     }
@@ -105,25 +102,4 @@ public class AudioManager : ScriptableObject
         
         sfxSource.PlayOneShot(clip);
     }
-
-    /*public void SetMusicVolume()
-    {
-        float volume = musicSlider.value;
-        audioMixer.SetFloat("music", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("musicVolume", volume);
-    }
-    public void SetSFXVolume()
-    {
-        float volume = sfxSlider.value;
-        audioMixer.SetFloat("sfx", Mathf.Log10(volume) * 20);
-        PlayerPrefs.SetFloat("sfxVolume", volume);
-    }
-    public void LoadVolume()
-    {
-        musicSlider.value = PlayerPrefs.GetFloat("musicVolume");
-        sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume");
-
-        SetMusicVolume();
-        SetSFXVolume();
-    }*/
 }

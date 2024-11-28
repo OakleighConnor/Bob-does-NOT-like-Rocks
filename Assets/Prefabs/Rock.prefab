@@ -111,6 +111,7 @@ MonoBehaviour:
   hardTile: {fileID: 0}
   dirtTile: {fileID: 0}
   sm: {fileID: 0}
+  player: {fileID: 0}
 --- !u!61 &7247433185550172754
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -62,6 +62,7 @@ MonoBehaviour:
     m_Bits: 256
   door: {fileID: 0}
   am: {fileID: 11400000, guid: fa750533524fad54eb11eb1339f70e44, type: 2}
+  audioSpeed: 0
 --- !u!50 &1843896078761354267
 Rigidbody2D:
   serializedVersion: 5

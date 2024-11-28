@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AudioManagerScriptableObject
   m_EditorClassIdentifier: 
   startingPitch: 1
-  title: {fileID: 0}
+  title: {fileID: 8300000, guid: f986e7d244138644c9f210e434d370fe, type: 3}
   level: {fileID: 8300000, guid: bcdff10adf4d6cf438c6ea04a4c6ee69, type: 3}
   currentTrack: {fileID: 0}
   targetTrack: {fileID: 0}
@@ -31,6 +31,4 @@ MonoBehaviour:
   musicSource: {fileID: 0}
   sfxSourcePref: {fileID: 4593550821805000531, guid: e063f3df056eb884f8c9d419e104568b, type: 3}
   sfxSource: {fileID: 0}
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
   track: 0
