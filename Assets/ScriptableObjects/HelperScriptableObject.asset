@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d831a8555c2dc2245a14f06579175be6, type: 3}
   m_Name: HelperScriptableObject
   m_EditorClassIdentifier: 
+  scenes:
+  - Level1
+  randomScene: 

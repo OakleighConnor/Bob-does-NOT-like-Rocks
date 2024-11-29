@@ -8,23 +8,28 @@ namespace Rock
 
     public class RockScript : MonoBehaviour
     {
+        [Header("LayerMasks")]
         public LayerMask otherRock;
 
+        [Header("Checks")]
         public Transform groundCheck;
-        public Collider2D groundCheckCol;
         public Transform playerMovePoint;
 
         // Tilemaps
+        [Header("Tilemaps")]
         public Tilemap hardTile;
         public Tilemap dirtTile;
 
         // variables holding the different player states
+        [Header("States")]
         public IdleState idleState;
         public WeakState weakState;
         public FallingState fallState;
 
+        [Header("References")]
         public StateMachine sm;
         public PlayerScript player;
+        public AudioManager am;
 
 
         void Awake()
@@ -33,15 +38,16 @@ namespace Rock
         }
         // Start is called before the first frame update
         void Start()
-        {
+        { 
             sm = gameObject.AddComponent<StateMachine>();
             player = FindAnyObjectByType<PlayerScript>();
-            groundCheckCol = groundCheck.GetComponent<Collider2D>();
 
             // add new states here
             idleState = new IdleState(this, sm);
             weakState = new WeakState(this, sm);
             fallState = new FallingState(this, sm);
+
+            playerMovePoint = player.movePoint;
 
             // initialise the statemachine with the default state
             sm.Init(idleState);
@@ -51,6 +57,11 @@ namespace Rock
         public void Update()
         {
             sm.CurrentState.LogicUpdate();
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Debug.Log(sm.CurrentState.ToString());
+            }
         }
 
 
@@ -94,8 +105,20 @@ namespace Rock
 
         public bool CheckForTile(Vector3 checkPos) // Returns true if a tile is in the way, else it returns false
         {
+            if (hardTile.GetTile(hardTile.WorldToCell(checkPos)))
+            {
+                Debug.Log("Hard");
+            }
+            if (dirtTile.GetTile(dirtTile.WorldToCell(checkPos)))
+            {
+                Debug.Log("Dirt");
+            }
+
+
             if (hardTile.GetTile(hardTile.WorldToCell(checkPos)) || dirtTile.GetTile(dirtTile.WorldToCell(checkPos)) || Physics2D.OverlapCircle(checkPos, .2f, otherRock))
             {
+                Debug.Log("Tile");
+
                 // Return true if a tile is occupying the position
                 return true;
             }

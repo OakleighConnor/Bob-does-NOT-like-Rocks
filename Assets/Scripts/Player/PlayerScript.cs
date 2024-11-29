@@ -4,23 +4,28 @@ using UnityEngine.Tilemaps;
 using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour
 {
-    public DoorManager dm;
-
     public float speed = 5f;
-    public Transform movePoint;
-
     public Vector2 moveDir;
+    public float audioSpeed;
+    public bool stop = false;
 
-    public Tilemap map;
+    [Header("References")]
+    public Animator anim;
+    SpriteRenderer sr;
+    public AudioManager am;
+    public DoorManager dm;
+    ResultsButtons ui;
 
-    public LayerMask obstruction;
-    public LayerMask doorLayer;
-
+    [Header("Transforms")]
+    public Transform movePoint;
     public Transform door;
 
-    public AudioManager am;
+    [Header("Tilemaps")]
+    public Tilemap map;
 
-    public float audioSpeed;
+    [Header("LayerMasks")]
+    public LayerMask obstruction;
+    public LayerMask doorLayer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -31,10 +36,13 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (stop) return;
+
         // Moves player towards the move point
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, speed * Time.deltaTime);
 
         KeyboardMovement();
+        Animation();
 
         SwipeDetection.instance.swipePerformed += context => { Movement(context); };
 
@@ -42,21 +50,25 @@ public class PlayerScript : MonoBehaviour
     public void LoadPlayer()
     {
         audioSpeed = am.startingPitch;
-
         am.ChangeMusic(am.level);
 
         movePoint.parent = null;
         door = GameObject.FindGameObjectWithTag("Door").transform;
         dm = door.GetComponent<DoorManager>();
+        anim = gameObject.GetComponentInChildren<Animator>();
+        sr = gameObject.GetComponentInChildren<SpriteRenderer>();
+        ui = FindAnyObjectByType<ResultsButtons>();
+
+        am.PlaySFX(am.loading);
     }
 
     public void Movement(Vector2 direction)
     {
         if (Vector3.Distance(transform.position, movePoint.position) != 0f) return;
 
-        if (audioSpeed < 2f)
+        if(audioSpeed < 2f)
         {
-            audioSpeed += 0.2f;
+            audioSpeed += audioSpeed / 5f;
         }
 
         if (direction.x <= 0)
@@ -107,17 +119,27 @@ public class PlayerScript : MonoBehaviour
         if (map.GetTile(map.WorldToCell(movePoint.position)))
         {
             map.SetTile(map.WorldToCell(movePoint.position), null);
+            am.PlaySFX(am.dig);
+        }
+
+        if (transform.position.x > movePoint.position.x)
+        {
+            // left
+            sr.flipX = true;
+        }
+        else
+        {
+            // right
+            sr.flipX = false;
         }
     }
 
     public void KeyboardMovement()
     {
-
-
-
         if (map.GetTile(map.WorldToCell(movePoint.position)))
         {
             map.SetTile(map.WorldToCell(movePoint.position), null);
+            am.PlaySFX(am.dig);
         }
 
 
@@ -132,7 +154,7 @@ public class PlayerScript : MonoBehaviour
             {
                 if (audioSpeed < 2f)
                 {
-                    audioSpeed += 0.2f;
+                    audioSpeed += audioSpeed / 5f;
                 }
             }
 
@@ -165,6 +187,24 @@ public class PlayerScript : MonoBehaviour
 
     public void Death()
     {
+        if (stop) return;
+        ui.GameOver();
         Debug.Log("Player Death");
+        sr.enabled = false;
+        am.PlaySFX(am.dig);
+        am.StopMusic();
+        stop = true;
+    }
+
+    public void Animation()
+    {
+        if (Vector3.Distance(transform.position, movePoint.position) == 0f)
+        {
+            anim.SetBool("Moving", false);
+        }
+        else
+        {
+            anim.SetBool("Moving", true);
+        }
     }
 }

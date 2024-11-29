@@ -5,12 +5,15 @@ using UnityEngine;
 
 public class DoorManager : MonoBehaviour
 {
-    public GameObject[] keyArray;
+    GameObject[] keyArray;
     public List<GameObject> keys = new List<GameObject>();
 
     public bool doorOpen;
 
-    public Animator anim;
+    PlayerScript player;
+    Animator anim;
+    ResultsButtons ui;
+    public AudioManager am;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +29,11 @@ public class DoorManager : MonoBehaviour
 
     void LoadDoor()
     {
+        player = FindAnyObjectByType<PlayerScript>();
+
         doorOpen = false;
+
+        ui = FindAnyObjectByType<ResultsButtons>();
 
         anim = GetComponent<Animator>();
 
@@ -40,6 +47,8 @@ public class DoorManager : MonoBehaviour
 
     public void KeyCollected(GameObject key)
     {
+        am.PlaySFX(am.key);
+
         for (int i = 0; i < keys.Count; i++)
         {
             if(keys[i].gameObject == key)
@@ -60,13 +69,18 @@ public class DoorManager : MonoBehaviour
     {
         anim.Play("Opened");
         doorOpen = true;
+        am.PlaySFX(am.doorOpen);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.CompareTag("Player") && doorOpen)
         {
-            Debug.Log("Exit");
+            player.anim.Play("Exit");
+            player.stop = true;
+            am.StopMusic();
+            am.PlaySFX(am.playerEscape);
+            ui.Win();
         }
     }
 }

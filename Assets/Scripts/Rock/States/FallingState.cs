@@ -15,6 +15,7 @@ namespace Rock
 
         public override void Exit()
         {
+            rock.am.PlaySFX(rock.am.rock);
             base.Exit();
         }
 

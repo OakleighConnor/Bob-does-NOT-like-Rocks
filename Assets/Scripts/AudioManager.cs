@@ -52,8 +52,7 @@ public class AudioManager : ScriptableObject
 
         musicSource.pitch = speed;
 
-        if(speed >)
-        audioMixer.SetFloat("Pitch", 1f / speed);
+        audioMixer.SetFloat("pitch", 1f / speed);
 
         if (speed <= 1)
         {
@@ -67,19 +66,15 @@ public class AudioManager : ScriptableObject
         return speed;
     }
 
+    public void StopMusic()
+    {
+        musicSource.Stop();
+    }
 
     public void ChangeMusic(AudioClip clip)
     {
         musicSource = Instantiate(musicSourcePref).GetComponent<AudioSource>();
-
-        if (PlayerPrefs.HasKey("musicVolume"))
-        {
-            //LoadVolume();
-        }
-        else
-        {
-            //SetMusicVolume();
-        }
+        sfxSource = Instantiate(sfxSourcePref).GetComponent<AudioSource>();
         
         musicSource.clip = clip;
         musicSource.Play();

@@ -29,6 +29,16 @@ public class Buttons : MonoBehaviour
     void Start()
     {
         am.ChangeMusic(am.title);
+
+        if (PlayerPrefs.HasKey("musicVolume"))
+        {
+            LoadVolume();
+        }
+        else
+        {
+            SetMusicVolume();
+            SetSFXVolume();
+        }
     }
 
     void Update()
