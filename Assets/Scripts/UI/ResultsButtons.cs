@@ -1,24 +1,24 @@
 using UnityEngine;
+using UnityEngine.Video;
 
 public class ResultsButtons : MonoBehaviour
 {
+    public GameObject pauseButton;
+
     [Header("Menus")]
     public GameObject resultsScreen;
+    public GameObject pauseMenu;
 
     [Header("Results Text")]
     public GameObject winText;
     public GameObject loseText;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("References")]
+    public PlayerScript player;
+
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        player = FindAnyObjectByType<PlayerScript>();
     }
 
     public void GameOver()
@@ -40,5 +40,19 @@ public class ResultsButtons : MonoBehaviour
         resultsScreen.SetActive(true);
     }
 
+    public void OpenPause()
+    {
+        pauseButton.SetActive(false);
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0;
+        player.stop = true;
+    }   
 
+    public void ClosePause()
+    {
+        pauseButton.SetActive(true);
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+        player.stop = false;
+    }
 }

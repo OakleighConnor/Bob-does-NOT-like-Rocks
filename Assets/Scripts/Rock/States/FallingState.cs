@@ -3,6 +3,8 @@ namespace Rock
 {
     public class FallingState : State
     {
+        Vector3 lastPos;
+
         // constructor
         public FallingState(RockScript rock, StateMachine sm) : base(rock, sm)
         {
@@ -30,8 +32,10 @@ namespace Rock
 
             if(Vector3.Distance(rock.transform.position, rock.groundCheck.position) == 0f)
             {
-                rock.groundCheck.position += new Vector3(0f, -1, 0f);
+                lastPos = rock.groundCheck.position;
 
+                rock.groundCheck.position += new Vector3(0f, -1, 0f);
+                
                 if (rock.CheckForTile(rock.groundCheck.position))
                 {
                     rock.sm.ChangeState(rock.idleState);
@@ -39,7 +43,7 @@ namespace Rock
 
             }
 
-            if(rock.player.movePoint.position == rock.groundCheck.position)
+            if(rock.player.transform.position == rock.groundCheck.position)
             {
                 rock.player.Death();
             }

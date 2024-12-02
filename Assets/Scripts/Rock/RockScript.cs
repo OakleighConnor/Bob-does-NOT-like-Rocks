@@ -35,6 +35,7 @@ namespace Rock
         void Awake()
         {
             groundCheck.parent = null;
+            gameObject.transform.SetParent(null);
         }
         // Start is called before the first frame update
         void Start()
