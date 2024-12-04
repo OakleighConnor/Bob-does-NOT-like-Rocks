@@ -49,7 +49,6 @@ public class AudioManager : ScriptableObject
 
     public float SetMusicSpeed(float speed)
     {
-
         musicSource.pitch = speed;
 
         audioMixer.SetFloat("pitch", 1f / speed);
@@ -94,7 +93,6 @@ public class AudioManager : ScriptableObject
 
     public void PlaySFX(AudioClip clip)
     {
-        
         sfxSource.PlayOneShot(clip);
     }
 }

@@ -38,6 +38,7 @@ public class ResultsButtons : MonoBehaviour
     public void OpenMenu()
     {
         resultsScreen.SetActive(true);
+        pauseButton.SetActive(false);
     }
 
     public void OpenPause()
